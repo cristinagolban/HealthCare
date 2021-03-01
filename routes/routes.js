@@ -14,7 +14,7 @@ function MyStack() {
     return (
       <NavigationContainer independent={true}>
         <Stack.Navigator>
-          <Stack.Screen name="SignUp" component={SignUp } />
+          <Stack.Screen name="SignUp" component={SignUpStack } />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="HomeUser" component={HomeUser} />
           <Stack.Screen name="Doctor" component={Doctor} />
