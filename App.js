@@ -1,21 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import React from 'react'
+ 
+// import the different screens
+import * as firebase from "firebase";
+ 
+// Optionally import the services that you want to use
+import "firebase/auth";
+import "firebase/database";
+import "firebase/firestore";
+import "firebase/functions";
+import "firebase/storage";
+ 
+// Initialize Firebase
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAw6PCRrYCBPo_hfk7BBfP94eZv56POqP4",
+    authDomain: "healthcarefinal-7d670.firebaseapp.com",
+    projectId: "healthcarefinal-7d670",
+    storageBucket: "healthcarefinal-7d670.appspot.com",
+    messagingSenderId: "734701130061",
+    appId: "1:734701130061:web:80512fb119d7ab7ecae704",
+    measurementId: "G-KD0VV5LBRQ"
+  };
+  // Initialize Firebase
+ 
+  firebase.initializeApp(firebaseConfig);
+ 
+  //Imports for the fonts 
+  //import * as Font from 'expo-font';
+  //import  AppLoading from 'expo-app-loading';
+ 
+  import MyStack from './routes/routes.js';
+ 
+  export default class App extends React.Component{
+ 
+    constructor(){
+ 
+      super();
+ 
+      this.state = {
+        
+      }
+    }
+ 
+  
+ 
+    render(){
+        return(
+          <MyStack />
+        )
+    }
+ 
+  }
