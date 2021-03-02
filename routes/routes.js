@@ -25,22 +25,22 @@ function BottomTabNavigatorUser(){
                                     borderTopLeftRadius: 20,
                                     borderTopRightRadius: 20,
                                     overflow: 'hidden',
+                                    
                         }}
+                        shifting={true}
         >
-            <Tab.Screen name='Acasa'  component={HomeUser} options={{
+            <Tab.Screen name='Acasa'  component={HomeUser} options={{   
                                                                         tabBarIcon: ({color}) => (
-                                                                          <MaterialCommunityIcons  name={'home'} color={color} size={28}/>
+                                                                          <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
                                                                         ),
-                                                                        tabBarColor: 'black',
-                                                                        tabBarLabel: <Text style={{fontWeight:'bold'}}>Acasa</Text>
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
                                                                         
                                                                     }}/>
-            <Tab.Screen name='Programeaza'  component={Programeaza} options={{
+            <Tab.Screen name='Programeaza'  component={Programeaza} options={{ 
                                                                         tabBarIcon: ({color}) => (
-                                                                          <MaterialCommunityIcons  name={'calendar-arrow-right'} color={color} size={28}/>
+                                                                          <MaterialCommunityIcons  name={'calendar-arrow-right'} color={color} size={25}/>
                                                                         ),
-                                                                        tabBarColor: 'black',
-                                                                        tabBarLabel: <Text style={{fontWeight:'bold'}}>Programeaza</Text>
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programeaza</Text>
                                                                         
                                                                     }}/>
         </Tab.Navigator>
