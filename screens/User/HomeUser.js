@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {View, Text} from 'react-native';
-import BottomTabNavigatorUser from '../../routes/user-routes';
 
 
 
@@ -10,8 +9,7 @@ export default class HomeUser extends React.Component {
   render(){
     return(
       <View style={{flex:1}}>
-        <Text></Text>
-        <BottomTabNavigatorUser />
+        <Text>Acasa</Text>
 
       </View>
     )

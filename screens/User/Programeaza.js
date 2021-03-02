@@ -10,7 +10,7 @@ export default class Programeaza extends React.Component {
   render(){
     return(
       <View>
-        <Text></Text>
+        <Text>Programeaza</Text>
       </View>
     )
   }
