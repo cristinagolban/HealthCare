@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {View, Text, Button, Alert, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
 import * as firebase from "firebase";
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -6,67 +6,10 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
-
-
-// var admin = firebase;
-// var db = admin.database();
-// var day = new Date().getDate();
-// var month = new Date().getMonth() + 1;
-// var year = new Date().getFullYear();
-// var date =   month + '-' + day + '-' + year;
-// var hgour = '13:00'
-
-// //var ref = db.ref('/programari/sebi');
-// //var usersRef = ref.child(date);
-
-// var refString = '/programari/sebi/' + date ;
-
-// var ref = db.ref(refString)
-// var ore = [];
-// var bla = '';
-
-
-//    let temp = '';
-//   ref.once("value")
-//     .then((snapshot) => {
-//       snapshot.forEach((childSnapshot) => {
-
-
-//           //console.log(childSnapshot.key);
-//           temp = childSnapshot.key
-//           ore.push(temp);
-      
-//     });
-//   })
-
-// var a = new Date()
-// var bla = a.toISOString().split('T')[0]
-
+LogBox.ignoreAllLogs();
 
 export default class Programeaza extends React.Component {
 
-
-
-
-//   blaGetData(){
-    
-//     usersRef.child("13:00").set({
-//         nume:"ion",
-//         prenume:"ddd",
-//         simptome:"aaaanfdfbdsndivnd;f",
-//         ora:"13:00"
-//     })
-//     Alert.alert('Action!', 'A new To-do item was created');
-//   }
-
-  /** Print the difference between two arrays (doesn't)
-   * var first = [ 1, 2, 3, 4, 5 ];
-    var second = [ 4, 5, 6 ];
- 
-    var difference = first.filter(x => !second.includes(x));
-    console.log(difference);
-   */
 
   constructor(){
 
@@ -92,7 +35,12 @@ export default class Programeaza extends React.Component {
       differenceArray : [],
       pickedHour: '',
     };
+
+    
   }
+
+
+
 
   async componentDidMount(){
       firebase.database().ref("/doctor").once("value").then((snapshot) => {
@@ -121,29 +69,16 @@ export default class Programeaza extends React.Component {
           
       });
       this.setState({doctorsArray:tempDoctorsArray});
-      console.log(this.state.doctorsArray);
+      //console.log(this.state.doctorsArray);
     }).catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
+
+
+    
   }
 
-  addHour = () => {
-    var admin = firebase;
-    var db = admin.database();
-    var refPath = '/programari'+'/'+this.state.chosenDoctor+'/'+this.date;
-    var ref = db.ref(refPath);
-    var hoursRef = ref.child("15:00");
-
-    hoursRef.set({
-              nume:"andrei",
-              prenume:"sss",
-              simptome:"aaaanfdfbdsndivnd;f",
-          }).catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-          });
-          Alert.alert('Action!', 'A new To-do item was created');
-        
-  }
+  
 
   addHourToDatabase = () => {
     var admin = firebase;
@@ -160,6 +95,21 @@ export default class Programeaza extends React.Component {
             console.log('There has been a problem with your fetch operation: ' + error.message);
           });
           Alert.alert('Action!', 'Te-ai programat cu succes');
+
+    // this.setState({
+    //   nume: '',
+    //   prenume: '',
+    //   simptome: '',
+    //   chosenDoctor : '',
+    //   isDatePickerVisible: false,
+    //   pickedDate: '',
+    //   scheduleArray : [],
+    //   differenceArray : [],
+    //   pickedHour: '',
+    // })
+
+
+        
         
   }
 
@@ -292,7 +242,7 @@ export default class Programeaza extends React.Component {
         </ScrollView>
         </SafeAreaView>
         <View style={{marginBottom:'4%'}}>
-            <TouchableOpacity onPress={this.addHourToDatabase} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
+            <TouchableOpacity onPress={()=>{this.props.navigation.reset({index:0, routes:[{name:"Acasa"}]})}} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
                   <Text style={{fontFamily:'bold-font', color:'white', fontSize:18}}>Programeaza</Text>
             </TouchableOpacity>
           </View>
