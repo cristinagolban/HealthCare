@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, Button, Alert, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
 import * as firebase from "firebase";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export default class Programeaza extends React.Component {
 
@@ -34,15 +35,22 @@ export default class Programeaza extends React.Component {
       scheduleArray : [],
       differenceArray : [],
       pickedHour: '',
+      status: 'In asteptare',
+      emailFromUser: '',
     };
-
-    
   }
 
-
-
-
   async componentDidMount(){
+
+    try {
+      const value = await AsyncStorage.getItem('email')
+      if(value !== null) {
+        this.setState({emailFromUser:value})
+      }
+    } catch(e) {
+      // error reading value
+    }
+
       firebase.database().ref("/doctor").once("value").then((snapshot) => {
         
         var tempDoctorEmail = '';
@@ -65,54 +73,48 @@ export default class Programeaza extends React.Component {
           tempDoctorObject.value = tempDoctorName;
           tempDoctorsArray.push(tempDoctorObject);
           
-          
-          
       });
       this.setState({doctorsArray:tempDoctorsArray});
-      //console.log(this.state.doctorsArray);
+      console.log(this.state.doctorsArray);
     }).catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
+  }
 
+  addHourToDatabase = () => {
+    if( this.state.nume === '' || 
+        this.state.prenume === '' || 
+        this.state.simptome === '' ||
+        this.state.chosenDoctor === '' ||
+        this.date === '' ||
+        this.state.pickedHour === '' 
+      ){
+      Alert.alert('Action!', 'Completeaza toate campurile');
+    }else{
+          var admin = firebase;
+          var db = admin.database();
+          var refPath = '/programari'+'/'+this.state.chosenDoctor+'/'+this.date;
+          var ref = db.ref(refPath);
+          var hoursRef = ref.child(this.state.pickedHour);
 
-    
+          var emailAuth = this.state.emailFromUser;
+
+          hoursRef.set({
+                    nume:this.state.nume,
+                    prenume:this.state.prenume,
+                    simptome:this.state.simptome,
+                    status:this.state.status,
+                    email:emailAuth,
+                }).catch(function(error) {
+                  console.log('There has been a problem with your fetch operation: ' + error.message);
+                });
+                Alert.alert('Action!', 'Te-ai programat cu succes');
+                this.props.navigation.reset({index:0, routes:[{name:"Programeaza"}]});
+        
+      }
   }
 
   
-
-  addHourToDatabase = () => {
-    var admin = firebase;
-    var db = admin.database();
-    var refPath = '/programari'+'/'+this.state.chosenDoctor+'/'+this.date;
-    var ref = db.ref(refPath);
-    var hoursRef = ref.child(this.state.pickedHour);
-
-    hoursRef.set({
-              nume:this.state.nume,
-              prenume:this.state.prenume,
-              simptome:this.state.simptome,
-          }).catch(function(error) {
-            console.log('There has been a problem with your fetch operation: ' + error.message);
-          });
-          Alert.alert('Action!', 'Te-ai programat cu succes');
-
-    // this.setState({
-    //   nume: '',
-    //   prenume: '',
-    //   simptome: '',
-    //   chosenDoctor : '',
-    //   isDatePickerVisible: false,
-    //   pickedDate: '',
-    //   scheduleArray : [],
-    //   differenceArray : [],
-    //   pickedHour: '',
-    // })
-
-
-        
-        
-  }
-
   getScheduleForOneDay = () => {
     var admin = firebase;
     var db = admin.database();
@@ -139,9 +141,12 @@ export default class Programeaza extends React.Component {
   }
 
   findDifferentElementsBetweenArrays = () =>{
-    
-    this.setState({differenceArray:this.schedule.filter(x => ! this.state.scheduleArray.includes(x))});
-    
+    if(   this.state.chosenDoctor === '' ||
+          this.date === ''){
+            Alert.alert('Action!', 'Completeaza data si doctorul dorit!');
+    }else{
+      this.setState({differenceArray:this.schedule.filter(x => ! this.state.scheduleArray.includes(x))});
+    }
     console.log(this.differenceArray);
   }
 
@@ -176,7 +181,13 @@ export default class Programeaza extends React.Component {
     
   };
 
+  // handleProgrameaza(){
+  //   this.addHourToDatabase;
+  // }
 
+  // handleReset = () =>{
+  //   this.props.navigation.reset({index:0, routes:[{name:"Programeaza"}]});
+  // }
 
   render(){
     return(
@@ -204,13 +215,13 @@ export default class Programeaza extends React.Component {
                       onChangeText = {this.handleSimptome}
                       value = {this.state.simptome}
           />
-          <View style={{marginVertical:'3%', zIndex:1}}>
+          <View style={{marginVertical:'10%',zIndex:1}}>
             <DropDownPicker
                 items={this.state.doctorsArray}
-                placeholder="Alege doctor"
+                placeholder='Alege doctorul'
+                //searchablePlaceholder={this.state.label}
                 containerStyle={{height: 40}}
-                style={{backgroundColor: '#fafafa', zIndex:1}}
-                containerStyle={{zIndex:1}}
+                style={{backgroundColor: '#fafafa'}}
                 onChangeItem={item => this.setState({chosenDoctor:item.value})}
             />
           </View>
@@ -242,7 +253,7 @@ export default class Programeaza extends React.Component {
         </ScrollView>
         </SafeAreaView>
         <View style={{marginBottom:'4%'}}>
-            <TouchableOpacity onPress={()=>{this.props.navigation.reset({index:0, routes:[{name:"Acasa"}]})}} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
+            <TouchableOpacity onPress={this.addHourToDatabase} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
                   <Text style={{fontFamily:'bold-font', color:'white', fontSize:18}}>Programeaza</Text>
             </TouchableOpacity>
           </View>

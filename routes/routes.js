@@ -11,6 +11,7 @@ import Login from '../screens/Login';
 
 import HomeUser from '../screens/User/HomeUser';
 import Programeaza from '../screens/User/Programeaza';
+import ListaProgramari from '../screens/User/ListaProgramari';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcons from 'react-native-vector-icons/Ionicons';
@@ -41,6 +42,13 @@ function BottomTabNavigatorUser(){
                                                                           <MaterialCommunityIcons  name={'calendar-arrow-right'} color={color} size={25}/>
                                                                         ),
                                                                         tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programeaza</Text>
+                                                                        
+                                                                    }}/>
+            <Tab.Screen name='ListaProgramari'  component={ListaProgramari} options={{ 
+                                                                        tabBarIcon: ({color}) => (
+                                                                          <MaterialCommunityIcons  name={'format-list-text'} color={color} size={25}/>
+                                                                        ),
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programari</Text>
                                                                         
                                                                     }}/>
         </Tab.Navigator>

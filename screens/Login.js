@@ -2,14 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button, Modal, TouchableOpacity, TouchableHighlightBase } from 'react-native'
 import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
- 
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+
 var emailother = '';
 var passwordother = '';
  
 export default class Login extends React.Component {
- 
- 
- 
  
   constructor(){
  
@@ -27,7 +25,14 @@ export default class Login extends React.Component {
  
   }
  
- 
+  storeEmail = async() =>{
+    try{
+      await AsyncStorage.setItem('email', this.state.email)
+    }catch(e){
+
+    }
+  }
+
   handleLogin = () => {
     console.log(this.state.typeOfUser);
     if(this.state.typeOfUser === 'doctor'){
@@ -36,10 +41,8 @@ export default class Login extends React.Component {
       this.getDataFromAuth()
     }else if(this.state.typeOfUser === 'asistenta'){
       this.getDataFromDatabaseAsistenta()
-
     }
   }
- 
  
   getDataFromAuth = () =>{
     firebase
@@ -47,6 +50,7 @@ export default class Login extends React.Component {
     .signInWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => this.props.navigation.navigate('User'))
     .catch(error => this.setState({ errorMessage: error.message }))
+    this.storeEmail();
   }
  
  
@@ -62,8 +66,6 @@ export default class Login extends React.Component {
         if(childSnapshot.val().email===emailother && childSnapshot.val().password===passwordother)
         {
           this.props.navigation.navigate('Doctor')
- 
- 
         }
       
     });
