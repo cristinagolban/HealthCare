@@ -140,7 +140,7 @@ export default class ListaProgramari extends React.Component {
   render(){
 
     return(
-      <ScrollView style={{flex:1}} 
+      <ScrollView style={{flex:1,marginTop:80,backgroundColor:'white'}} 
                 refreshControl={
                     <RefreshControl
                     refreshing={this.state.refresh}
@@ -180,6 +180,6 @@ const styles = StyleSheet.create({
         fontSize:14,
         fontFamily:'normal-font',
         color:'green'
-    }
+    },
 })
 

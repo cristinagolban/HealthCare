@@ -191,7 +191,7 @@ export default class Programeaza extends React.Component {
 
   render(){
     return(
-      <View style={{alignItems:'center',justifyContent:'center', flex:1,flexDirection:'column',backgroundColor:'white',}}>
+      <View style={{alignItems:'center',justifyContent:'center', flex:1,flexDirection:'column',backgroundColor:'white',marginTop:80}}>
 
         <ScrollView style={{width:"100%",flex:1,marginTop:'2%'}}>
           <View style={{width:'90%',marginHorizontal:'5%'}}>

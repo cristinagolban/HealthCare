@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View } from 'react-native';
  
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -60,24 +60,28 @@ const Stack = createStackNavigator();
  
 function MyStack() {
     return (
-      <NavigationContainer independent={true}>
-        <Stack.Navigator>
+      <NavigationContainer  independent={true}>
+        <Stack.Navigator >
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="User"
                         component={BottomTabNavigatorUser}
                         options={ ({ navigation, route }) => ({ 
-                            headerStyle: {backgroundColor:"#2a6049"},
+                            headerTransparent:true,
+                            headerBackground: () => (
+                                                <View style={{backgroundColor:'white',height:80}} >
+                                                </View>
+                            ),
                             headerTitle: () => (
                                   <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center'}}>
-                                    <MaterialCommunityIcons  name={'account'} color="white" size={25}/>
-                                    <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}>{route.name}</Text>
+                                    {/* <MaterialCommunityIcons  name={'account'} color="white" size={25}/> */}
+                                    <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}></Text>
                                   </View>
                             ),
                             headerRight: () => (
                                     <TouchableOpacity  onPress={ () => navigation.navigate('SignUp')}>
-                                        <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center', padding:5}}>
-                                          <IonIcons  name={'log-out-outline'} color="white" size={28}/>
+                                        <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center',padding:20}}>
+                                        <MaterialCommunityIcons  name={'logout-variant'} color="#2a6049" size={30}/>
                                         </View>
                                     </TouchableOpacity>
                                     

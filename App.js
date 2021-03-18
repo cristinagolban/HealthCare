@@ -24,7 +24,7 @@ import "firebase/storage";
   };
   // Initialize Firebase
  
-  firebase.initializeApp(firebaseConfig);
+
  
   //Imports for the fonts 
   import * as Font from 'expo-font';
@@ -56,6 +56,7 @@ import "firebase/storage";
   
     async componentDidMount(){
       this._loadFontsAsync();
+      firebase.initializeApp(firebaseConfig);
     }
   
     render(){
