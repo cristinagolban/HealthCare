@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View, Text, Button, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, RefreshControl,StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CovidCard from '../../components/covid-card'; 
 
@@ -41,6 +41,7 @@ export default class HomeUser extends React.Component {
         total: '',
         recovered: '',
       },
+      refresh: false,
     }
   }
 
@@ -54,6 +55,7 @@ export default class HomeUser extends React.Component {
       // error reading value
     }
     this.getDataForEachCountry();
+    
   }
 
   getDataForEachCountry = () => {
@@ -149,53 +151,68 @@ export default class HomeUser extends React.Component {
   
 }
 
+onRefresh(){
+  this.setState({refresh: true});
+  this.getDataForEachCountry(); 
+  this.setState({refresh:false});
+}
+
   render(){
 
     return(
-      <View style={{flex:1,backgroundColor:'white',marginTop:80}}>
-        <ScrollView contentContainerStyle={{alignItems:'center'}}>
+      <View style={{flex:1,backgroundColor:'white',marginTop:50}}>
+        <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
         <View style={{backgroundColor:"white",width:'100%' ,borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
         <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
-            <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049"}}>Bine ai venit</Text>
+            <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%', marginLeft:'0.5%'}}>Bine ai venit</Text>
             <Text style={{fontSize:30, fontFamily:'bold-font',color:"#2a6049"}}>Date COVID-19 Europa</Text>
           </View>
-          </View>
+        </View>
+        <ScrollView contentContainerStyle={{alignItems:'center'}}
+                    refreshControl={
+                      <RefreshControl
+                      refreshing={this.state.refresh}
+                      onRefresh={this.onRefresh.bind(this)}
+                      />
+                  }
+        >
+          
+       
         <CovidCard  countryName={this.state.romania.country} 
                     flagPath={require('../../assets/RomaniaFlag.png')} 
                     shapePath={require('../../assets/RomaniaShape.png')}
-                    newCases={this.state.romania.new}
-                    totalCases={this.state.romania.total}
-                    recoveredCases={this.state.romania.recovered}
+                    newCases={this.state.romania.new === null ? 'N/A' : this.state.romania.new}
+                    totalCases={this.state.romania.total === null ? 'N/A' : this.state.romania.total}
+                    recoveredCases={this.state.romania.recovered === null ? 'N/A' : this.state.romania.recovered}
         />
         <CovidCard  countryName={'Germania'} 
                     flagPath={require('../../assets/GermaniaFlag.png')} 
                     shapePath={require('../../assets/GermaniaShape.png')}
-                    newCases={this.state.germania.new}
-                    totalCases={this.state.germania.total}
-                    recoveredCases={this.state.germania.recovered}
+                    newCases={this.state.germania.new === null ? 'N/A' : this.state.germania.new}
+                    totalCases={this.state.germania.total === null ? 'N/A' : this.state.germania.total}
+                    recoveredCases={this.state.germania.recovered === null ? 'N/A' : this.state.germania.recovered}
         />
         <CovidCard  countryName={'Spania'} 
                     flagPath={require('../../assets/SpaniaFlag.png')} 
                     shapePath={require('../../assets/SpaniaShape.png')}
-                    newCases={this.state.spania.new}
-                    totalCases={this.state.spania.total}
-                    recoveredCases={this.state.spania.recovered}
+                    newCases={this.state.spania.new === null ? 'N/A' : this.state.spania.new}
+                    totalCases={this.state.spania.total === null ? 'N/A' : this.state.spania.total}
+                    recoveredCases={this.state.spania.recovered === null ? 'N/A' : this.state.spania.recovered}
         />
         <CovidCard  countryName={'Italia'} 
                     flagPath={require('../../assets/ItaliaFlag.png')} 
                     shapePath={require('../../assets/ItaliaShape.png')}
-                    newCases={this.state.italia.new}
-                    totalCases={this.state.italia.total}
-                    recoveredCases={this.state.italia.recovered}
+                    newCases={this.state.italia.new === null ? 'N/A' : this.state.italia.new}
+                    totalCases={this.state.italia.total === null ? 'N/A' : this.state.italia.total}
+                    recoveredCases={this.state.italia.recovered === null ? 'N/A' : this.state.italia.recovered}
         />
         <CovidCard  countryName={'Franta'} 
                     flagPath={require('../../assets/FrantaFlag.png')} 
                     shapePath={require('../../assets/FrantaShape.png')}
-                    newCases={this.state.franta.new}
-                    totalCases={this.state.franta.total}
-                    recoveredCases={this.state.franta.recovered}
+                    newCases={this.state.franta.new === null ? 'N/A' : this.state.franta.new}
+                    totalCases={this.state.franta.total === null ? 'N/A' : this.state.franta.total}
+                    recoveredCases={this.state.franta.recovered === null ? 'N/A' : this.state.franta.recovered}
         />
-         
         </ScrollView>
       </View>
     )

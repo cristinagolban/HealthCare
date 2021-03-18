@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import {View, Text, Button, Alert, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, StatusBar, Alert, TextInput, TouchableOpacity, ImageBackground, ScrollView, SafeAreaView} from 'react-native';
 import * as firebase from "firebase";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -67,10 +68,18 @@ export default class Programeaza extends React.Component {
           tempDoctorEmail = childSnapshot.val().email;
           //[doctor,@yahoo.com][0]
           tempDoctorName = tempDoctorEmail.split('@')[0];
+
+          var numeDoctor = '';
+          var prenumeDoctor = '';
+          var titluDoctor = '';
+
+          numeDoctor = tempDoctorName.split('_')[0].charAt(0).toUpperCase()+tempDoctorName.split('_')[0].slice(1);
+          prenumeDoctor = tempDoctorName.split('_')[1].charAt(0).toUpperCase()+tempDoctorName.split('_')[1].slice(1);
+          titluDoctor = 'Dr. '+numeDoctor+' '+prenumeDoctor;
           //doctor
-          tempDoctorObject.label = tempDoctorName;
+          tempDoctorObject.label = titluDoctor;
           //doctor
-          tempDoctorObject.value = tempDoctorName;
+          tempDoctorObject.value = titluDoctor;
           tempDoctorsArray.push(tempDoctorObject);
           
       });
@@ -191,70 +200,97 @@ export default class Programeaza extends React.Component {
 
   render(){
     return(
-      <View style={{alignItems:'center',justifyContent:'center', flex:1,flexDirection:'column',backgroundColor:'white',marginTop:80}}>
-
+      <View style={{alignItems:'center',justifyContent:'center', flex:1,flexDirection:'column',backgroundColor:'white',marginTop:50}}>
+        <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
+        <View style={{backgroundColor:"white",width:'100%' ,borderBottomLeftRadius:20,borderBottomRightRadius:20,marginBottom:'3%'}}>
+          <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+            <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%',  marginLeft:'1%'}}>Programeaza-te</Text>
+            <Text style={{fontSize:28, fontFamily:'bold-font',color:"#2a6049"}}>Completeaza campurile</Text>
+          </View>
+        </View>
         <ScrollView style={{width:"100%",flex:1,marginTop:'2%'}}>
           <View style={{width:'90%',marginHorizontal:'5%'}}>
-          <Text style={{fontSize:14, fontFamily:'normal-font', color:"#2a6049"}}>Nume</Text>
-          <TextInput  style={{marginBottom:'5%', borderColor:"gray", borderBottomWidth:1, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }} 
-                      underlineColorAndroid="transparent"
-                      onChangeText = {this.handleNume}
-                      value = {this.state.nume}
-          />
-          <Text style={{ fontSize:14, fontFamily:'normal-font', color:"#2a6049"}}>Prenume</Text>
-          <TextInput  style={{marginBottom:'5%', borderColor:"gray", borderWidth:0.5, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }} 
+            <View style={{marginBottom:'8%', flexDirection:'row',paddingBottom:1, borderColor:"gray", borderBottomWidth:1, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0}}>
+              <MaterialCommunityIcons  name={'account-arrow-right'} color="#2a6049" size={26} style={{marginRight:'2%'}}/>
+              <TextInput  style={{flex:1,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }} 
+                          underlineColorAndroid="transparent"
+                          onChangeText = {this.handleNume}
+                          value = {this.state.nume}
+                          placeholder = 'Nume'
+                          placeholderTextColor = "#d3e0db"
+              />
+            </View>
+            <View style={{marginBottom:'8%', flexDirection:'row',paddingBottom:1, borderColor:"gray", borderBottomWidth:1, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0}}>
+              <MaterialCommunityIcons  name={'account-arrow-right'} color="#2a6049" size={26} style={{marginRight:'2%'}}/>
+              <TextInput  style={{flex:1,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }} 
                       underlineColorAndroid="transparent"
                       onChangeText = {this.handlePrenume}
                       value = {this.state.prenume}
-          />
-          <Text style={{fontSize:14, fontFamily:'normal-font', color:"#2a6049"}}>Simptome</Text>
-          <TextInput  style={{marginBottom:'5%', textAlignVertical:'top', borderColor:"gray", borderWidth:0.5, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }} 
-                      underlineColorAndroid="transparent"
-                      multiline={true}
-                      numberOfLines={5}
-                      onChangeText = {this.handleSimptome}
-                      value = {this.state.simptome}
-          />
-          <View style={{marginVertical:'10%',zIndex:1}}>
+                      placeholder = 'Prenume'
+                      placeholderTextColor = "#d3e0db"
+              />
+            </View>
+            <View style={{marginBottom:'8%', flexDirection:'row',paddingBottom:1, borderColor:"gray", borderBottomWidth:1, borderTopWidth:0, borderLeftWidth:0, borderRightWidth:0}}>
+              <MaterialCommunityIcons  name={'tab-plus'} color="#2a6049" size={22} style={{marginRight:'2%'}}/>
+                <TextInput   style={{flex:1,fontSize:16, fontFamily:'bold-font', color:"#2a6049" }}
+                            underlineColorAndroid="transparent"
+                            multiline={true}
+                            onChangeText = {this.handleSimptome}
+                            value = {this.state.simptome}
+                            placeholder = 'Simptome'
+                            placeholderTextColor = "#d3e0db"
+                />
+           </View>
+
+          <View style={{marginBottom:'8%', zIndex:1}}>
             <DropDownPicker
                 items={this.state.doctorsArray}
                 placeholder='Alege doctorul'
                 //searchablePlaceholder={this.state.label}
-                containerStyle={{height: 40}}
-                style={{backgroundColor: '#fafafa'}}
+                containerStyle={{height: 50}}
+                arrowColor={'white'}
+                arrowSize={20}
+                labelStyle={{fontFamily:'normal-font'}}
+                placeholderStyle={{color:'white', fontSize:16}}
+                style={{backgroundColor: "#2a6049"}}
+                selectedLabelStyle={{color:'white'}}
                 onChangeItem={item => this.setState({chosenDoctor:item.value})}
             />
           </View>
-          <View style={{marginVertical:'4%'}}>
-            <TouchableOpacity onPress={this.showDatePicker} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{fontFamily:'bold-font', color:'white', fontSize:18}}>Alege data</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:'8%', overflow:'hidden'}}>
+            <View >
+              <TouchableOpacity onPress={this.showDatePicker} style={{width:170,height:100, backgroundColor:"#2a6049", borderRadius:5, justifyContent:'center', alignItems:'center'}}>
+                    <MaterialCommunityIcons  name={'calendar-range'} color="white" size={30}/>
+                    <Text style={{fontFamily:'normal-font', color:'white', fontSize:16}}>Alege data</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View style={{marginVertical:'4%'}}>
-            <TouchableOpacity onPress={this.findDifferentElementsBetweenArrays} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{fontFamily:'bold-font', color:'white', fontSize:18}}>Vezi orele disponibile</Text>
-            </TouchableOpacity>
+            <View>
+              <TouchableOpacity onPress={this.findDifferentElementsBetweenArrays} style={{width:170,height:100, backgroundColor:"#2a6049", borderRadius:5, justifyContent:'center', alignItems:'center'}}>
+                    <MaterialCommunityIcons  name={'clock-outline'} color="white" size={30}/>
+                    <Text style={{fontFamily:'normal-font', color:'white', fontSize:16}}>Afiseaza Orar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           
           {/* <Button style={{marginTop:'5%'}} title="Press" onPress={this.findDifferentElementsBetweenArrays} /> */}
           
-           <SafeAreaView style={{marginVertical:'4%',height:50, alignItems:'center', justifyContent:'center',backgroundColor:"#2a6049" ,borderWidth:2, borderColor:"#2a6049", borderRadius:40 }}>
-           <ScrollView horizontal={true} style={{ width:'90%'}}>
+           <SafeAreaView style={{marginBottom:'8%',height:50, alignItems:'center', justifyContent:'center',backgroundColor:"#2a6049" ,borderWidth:2, borderColor:"#2a6049", borderRadius:5 }}>
+           <ScrollView horizontal={true} style={{ width:'90%'}} contentContainerStyle={{alignItems:'center'}}>
 
                 {
                 this.state.differenceArray.map((item) => (
                   <TouchableOpacity onPress={() => {this.setState({pickedHour:item}),console.log(this.state.pickedHour)}}>
-                      <Text style={{color:'white', fontSize:22, fontFamily:'bold-font'}}>{item}  </Text>
+                      <Text style={{color:'white', fontSize:20, fontFamily:'normal-font',}}>{item}  </Text>
                   </TouchableOpacity>
                 ))
                 }
                
         </ScrollView>
         </SafeAreaView>
-        <View style={{marginBottom:'4%'}}>
-            <TouchableOpacity onPress={this.addHourToDatabase} style={{width:'100%', height:50, backgroundColor:"#2a6049", borderRadius:40, justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{fontFamily:'bold-font', color:'white', fontSize:18}}>Programeaza</Text>
+        <View style={{marginBottom:'8%'}}>
+            <TouchableOpacity onPress={this.addHourToDatabase} style={{width:'100%', height:50,  borderRadius:5,backgroundColor:"#2a6049", justifyContent:'center', alignItems:'center',overflow:'hidden'}}>
+                  <Text style={{fontFamily:'normal-font', color:'white', fontSize:16}}>Programeaza</Text>
             </TouchableOpacity>
           </View>
           </View>

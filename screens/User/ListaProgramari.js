@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, StyleSheet, Text, ScrollView, View, FlatList } from 'react-native'
+import { RefreshControl, StyleSheet, Text, ScrollView, View, StatusBar } from 'react-native'
 import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
@@ -140,7 +140,9 @@ export default class ListaProgramari extends React.Component {
   render(){
 
     return(
-      <ScrollView style={{flex:1,marginTop:80,backgroundColor:'white'}} 
+      <View style={{flex:1,backgroundColor:'white',marginTop:50}}>
+      <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
+      <ScrollView style={{flex:1,backgroundColor:'white'}} 
                 refreshControl={
                     <RefreshControl
                     refreshing={this.state.refresh}
@@ -148,7 +150,6 @@ export default class ListaProgramari extends React.Component {
                     />
                 }
         >
-
           <Text style={{fontSize:20, fontFamily:'bold-font', textAlign:'center'}}>Programarile Mele</Text>
         {
             this.state.programari.map( item =>
@@ -160,6 +161,7 @@ export default class ListaProgramari extends React.Component {
             )
         }
       </ScrollView>
+      </View>
     )
   }
 

@@ -69,7 +69,7 @@ function MyStack() {
                         options={ ({ navigation, route }) => ({ 
                             headerTransparent:true,
                             headerBackground: () => (
-                                                <View style={{backgroundColor:'white',height:80}} >
+                                                <View style={{backgroundColor:'white',height:50}} >
                                                 </View>
                             ),
                             headerTitle: () => (
@@ -80,8 +80,8 @@ function MyStack() {
                             ),
                             headerRight: () => (
                                     <TouchableOpacity  onPress={ () => navigation.navigate('SignUp')}>
-                                        <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center',padding:20}}>
-                                        <MaterialCommunityIcons  name={'logout-variant'} color="#2a6049" size={30}/>
+                                        <View style={{padding:6, backgroundColor:"#2a6049", borderTopLeftRadius:20,alignItems:'center'}}>
+                                        <MaterialCommunityIcons  name={'logout-variant'} color="white" size={30}/>
                                         </View>
                                     </TouchableOpacity>
                                     
