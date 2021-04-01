@@ -13,10 +13,13 @@ import HomeUser from '../screens/User/HomeUser';
 import Programeaza from '../screens/User/Programeaza';
 import ListaProgramari from '../screens/User/ListaProgramari';
 
+import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
+const Tab2 = createMaterialBottomTabNavigator();
 
 function BottomTabNavigatorUser(){
     return(
@@ -51,8 +54,43 @@ function BottomTabNavigatorUser(){
                                                                         tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programari</Text>
                                                                         
                                                                     }}/>
+                                                              
         </Tab.Navigator>
     )
+}
+
+
+
+function BottomTabNavigatorAsistenta(){
+  return(
+      <Tab2.Navigator  initialRouteName="Acasa"
+                      activeColor='white'
+                      barStyle={{ backgroundColor:"#2a6049",
+                                  borderTopLeftRadius: 20,
+                                  borderTopRightRadius: 20,
+                                  overflow: 'hidden',
+                                  
+                      }}
+                      shifting={true}
+      >
+          <Tab2.Screen name='Acasa'  component={HomeAsistenta} options={{   
+                                                                      tabBarIcon: ({color}) => (
+                                                                        <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
+                                                                      ),
+                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
+                                                                      
+                                                                  }}/>
+           <Tab2.Screen name='Acasa2'  component={HomeAsistenta} options={{   
+                                                                      tabBarIcon: ({color}) => (
+                                                                        <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
+                                                                      ),
+                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
+                                                                      
+                                                                  }}/>                                                       
+          
+                                                            
+      </Tab2.Navigator>
+  )
 }
 
 
@@ -66,6 +104,33 @@ function MyStack() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="User"
                         component={BottomTabNavigatorUser}
+                        options={ ({ navigation, route }) => ({ 
+                            headerTransparent:true,
+                            headerBackground: () => (
+                                                <View style={{backgroundColor:'white',height:50}} >
+                                                </View>
+                            ),
+                            headerTitle: () => (
+                                  <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center'}}>
+                                    {/* <MaterialCommunityIcons  name={'account'} color="white" size={25}/> */}
+                                    <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}></Text>
+                                  </View>
+                            ),
+                            headerRight: () => (
+                                    <TouchableOpacity  onPress={ () => navigation.navigate('SignUp')}>
+                                        <View style={{padding:6, backgroundColor:"#2a6049", borderTopLeftRadius:20,alignItems:'center'}}>
+                                        <MaterialCommunityIcons  name={'logout-variant'} color="white" size={30}/>
+                                        </View>
+                                    </TouchableOpacity>
+                                    
+                            ),
+                            headerLeft: () =>(
+                              <View></View>
+                            )
+                        })} 
+          />
+          <Stack.Screen name="Asistenta"
+                        component={BottomTabNavigatorAsistenta}
                         options={ ({ navigation, route }) => ({ 
                             headerTransparent:true,
                             headerBackground: () => (

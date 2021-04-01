@@ -254,7 +254,7 @@ export default class Programeaza extends React.Component {
                 placeholderStyle={{color:'white', fontSize:16}}
                 style={{backgroundColor: "#2a6049"}}
                 selectedLabelStyle={{color:'white'}}
-                onChangeItem={item => this.setState({chosenDoctor:item.value})}
+                onChangeItem={item => this.setState({chosenDoctor:item.value.replace(/\./g,"")})}
             />
           </View>
           <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:'8%', overflow:'hidden'}}>
