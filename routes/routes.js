@@ -14,6 +14,7 @@ import Programeaza from '../screens/User/Programeaza';
 import ListaProgramari from '../screens/User/ListaProgramari';
 
 import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
+import AsistentaPagina2 from '../screens/Asistenta/AsistentaPagina2';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcons from 'react-native-vector-icons/Ionicons';
@@ -80,7 +81,7 @@ function BottomTabNavigatorAsistenta(){
                                                                       tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
                                                                       
                                                                   }}/>
-           <Tab2.Screen name='Acasa2'  component={HomeAsistenta} options={{   
+           <Tab2.Screen name='Pag2'  component={AsistentaPagina2} options={{   
                                                                       tabBarIcon: ({color}) => (
                                                                         <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
                                                                       ),
