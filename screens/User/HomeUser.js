@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View, Text, ScrollView, RefreshControl,StatusBar} from 'react-native';
+import {View, Text, ScrollView, RefreshControl,StatusBar, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CovidCard from '../../components/covid-card'; 
 
@@ -9,7 +9,10 @@ export default class HomeUser extends React.Component {
   constructor(){
     super()
 
+    
+
     this.state={
+      shouldCovidDataBeRendered: false,
       emailFromUser: '',
       romania: {
         country: '',
@@ -163,11 +166,27 @@ onRefresh(){
       <View style={{flex:1,backgroundColor:'white',marginTop:50}}>
         <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
         <View style={{backgroundColor:"white",width:'100%' ,borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
-        <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
-            <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%', marginLeft:'0.5%'}}>Bine ai venit</Text>
-            <Text style={{fontSize:30, fontFamily:'bold-font',color:"#2a6049"}}>Date COVID-19 Europa</Text>
+          <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+            <Text style={{fontSize:18, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%', marginLeft:'0.5%'}}>Bine ai venit la</Text>
+            <Text style={{fontSize:32, fontFamily:'bold-font',color:"#2a6049"}}>HealthCare</Text>
           </View>
         </View>
+
+        { this.state.shouldCovidDataBeRendered === false ?
+
+          <View style={{flex:1, justifyContent:'space-evenly'}} >
+            <Image source={require('../../assets/welcome_page.png')} style={{width: '100%', height: '80%', zIndex:1}}/>
+              <TouchableOpacity style={{width:'90%', marginHorizontal:'5%'}} onPress={()=>this.setState({shouldCovidDataBeRendered:!this.state.shouldCovidDataBeRendered})}>
+                <View style={{justifyContent:'center', alignItems:'center', backgroundColor:'#2a6049', borderRadius:20, width:'70%', height:40,  marginHorizontal:'15%'}}>
+                  <Text style={{fontSize:16, fontFamily:'bold-font',color:"white"}}>Vezi date COVID-19</Text>
+                </View>
+              </TouchableOpacity>
+          </View>
+
+
+        :
+
+        
         <ScrollView contentContainerStyle={{alignItems:'center'}}
                     refreshControl={
                       <RefreshControl
@@ -176,7 +195,7 @@ onRefresh(){
                       />
                   }
         >
-          
+         
        
         <CovidCard  countryName={this.state.romania.country} 
                     flagPath={require('../../assets/RomaniaFlag.png')} 
@@ -213,7 +232,17 @@ onRefresh(){
                     totalCases={this.state.franta.total === null ? 'N/A' : this.state.franta.total}
                     recoveredCases={this.state.franta.recovered === null ? 'N/A' : this.state.franta.recovered}
         />
+
+ 
+        <TouchableOpacity style={{width:'90%', marginHorizontal:'5%', marginVertical:'5%'}} onPress={()=>this.setState({shouldCovidDataBeRendered:!this.state.shouldCovidDataBeRendered})}>
+            <View style={{justifyContent:'center', alignItems:'center', backgroundColor:'#2a6049', borderRadius:20, width:'70%', height:40,  marginHorizontal:'15%'}}>
+              <Text style={{fontSize:16, fontFamily:'bold-font',color:"white"}}>Ascunde date COVID-19</Text>
+            </View>
+        </TouchableOpacity>
+
         </ScrollView>
+
+        }
       </View>
     )
   }

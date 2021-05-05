@@ -3,6 +3,7 @@ import {View, Text, ScrollView, RefreshControl,StatusBar, ImageBackground, Touch
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import email from 'react-native-email'
 
 export default class HomeAsistenta extends React.Component {
 
@@ -85,7 +86,7 @@ export default class HomeAsistenta extends React.Component {
 
         })
         this.setState({programari:_tempProgramari});
-        console.log(this.state.programari);
+        //console.log(this.state.programari);
       })
   }
 
@@ -127,6 +128,17 @@ export default class HomeAsistenta extends React.Component {
     this.props.navigation.reset({index:0, routes:[{name:"Acasa"}]});
   }
 
+  handleEmail = () => {
+    const to = ['sofransebastian@yahoo.com'] // string or array of email addresses
+    email(to, {
+        // Optional additional arguments
+        
+       
+        subject: 'Test',
+        body: 'Test'
+    }).catch(console.error)
+}
+
   render(){
 
     return(
@@ -146,6 +158,7 @@ export default class HomeAsistenta extends React.Component {
                       />
                   }
         >
+
             {
                 this.state.programari.map((item) => (
                   <View style={{backgroundColor:"#2a6049",borderRadius:20,width:'90%', height:160, marginVertical:'3%', flexDirection:'column', overflow:'hidden'}}>
