@@ -12,6 +12,7 @@ import Login from '../screens/Login';
 import HomeUser from '../screens/User/HomeUser';
 import Programeaza from '../screens/User/Programeaza';
 import ListaProgramari from '../screens/User/ListaProgramari';
+import DetaliiDoctori from '../screens/User/DetaliiDoctori';
 
 import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
 import AsistentaPagina2 from '../screens/Asistenta/AsistentaPagina2';
@@ -55,6 +56,13 @@ function BottomTabNavigatorUser(){
                                                                         tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programari</Text>
                                                                         
                                                                     }}/>
+            <Tab.Screen name='DetaliiDoctori'  component={DetaliiDoctori} options={{ 
+                                                        tabBarIcon: ({color}) => (
+                                                          <MaterialCommunityIcons  name={'doctor'} color={color} size={25}/>
+                                                        ),
+                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Doctori</Text>
+                                                        
+                                                    }}/>                                                      
                                                               
         </Tab.Navigator>
     )

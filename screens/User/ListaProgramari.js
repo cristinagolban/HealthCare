@@ -44,6 +44,8 @@ export default class ListaProgramari extends React.Component {
         var nameTemp = '';
         var prenumeTemp = '';
         var statusTemp = '';
+        var oraTemp = '';
+        var doctorTemp = '';
 
         snapshot.forEach((childSnapshot) => {
             childSnapshot.forEach((childChild1) => {
@@ -53,16 +55,21 @@ export default class ListaProgramari extends React.Component {
                             nume: '',
                             prenume: '',
                             status: '',
+                            ora: '',
+                            doctor: '',
                         }
 
                         nameTemp = childChild2.val().nume;
                         prenumeTemp = childChild2.val().prenume;
                         statusTemp = childChild2.val().status;
-
+                        oraTemp = childChild2.key;
+                        doctorTemp = childSnapshot.key;
 
                         objectTemp.nume = nameTemp;
                         objectTemp.prenume = prenumeTemp;
                         objectTemp.status = statusTemp;
+                        objectTemp.ora = oraTemp;
+                        objectTemp.doctor = doctorTemp;
 
                         objectArrayTemp.push(objectTemp);
                     }
@@ -96,10 +103,13 @@ export default class ListaProgramari extends React.Component {
     ref.once("value")
       .then((snapshot) => {
 
+        
         var objectArrayTemp = [];
         var nameTemp = '';
         var prenumeTemp = '';
         var statusTemp = '';
+        var oraTemp = '';
+        var doctorTemp = '';
 
         snapshot.forEach((childSnapshot) => {
             childSnapshot.forEach((childChild1) => {
@@ -109,16 +119,21 @@ export default class ListaProgramari extends React.Component {
                             nume: '',
                             prenume: '',
                             status: '',
+                            ora: '',
+                            doctor: '',
                         }
 
                         nameTemp = childChild2.val().nume;
                         prenumeTemp = childChild2.val().prenume;
                         statusTemp = childChild2.val().status;
-
+                        oraTemp = childChild2.key;
+                        doctorTemp = childSnapshot.key;
 
                         objectTemp.nume = nameTemp;
                         objectTemp.prenume = prenumeTemp;
                         objectTemp.status = statusTemp;
+                        objectTemp.ora = oraTemp;
+                        objectTemp.doctor = doctorTemp;
 
                         objectArrayTemp.push(objectTemp);
                     }
@@ -157,6 +172,8 @@ export default class ListaProgramari extends React.Component {
                     <Text style={styles.textStyleName}>{item.nume}</Text>
                     <Text style={styles.textStyleName}>{item.prenume}</Text>
                     <Text style={ (item.status === 'In asteptare' ? styles.textStyleAwait : styles.textStyleAccept) }>{item.status}</Text>  
+                    <Text style={styles.textStyleName}>{item.ora}</Text>
+                    <Text style={styles.textStyleName}>{item.doctor}</Text>
                 </View>    
             )
         }
