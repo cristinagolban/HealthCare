@@ -242,7 +242,7 @@ export default class Programeaza extends React.Component {
                 />
            </View>
 
-          <View style={{marginBottom:'8%'}}>
+          <View style={{marginBottom:'8%', zIndex:1}}>
             <DropDownPicker
                 items={this.state.doctorsArray}
                 placeholder='Alege doctorul'
