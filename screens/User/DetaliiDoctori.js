@@ -84,7 +84,7 @@ export default class DetaliiDoctori extends React.Component {
         <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
 
             <FlatList 
-                style={{width:'100%'}}
+                style={{width:'100%', marginTop:'15%'}}
                 contentContainerStyle={{alignItems:'center', justifyContent:'center'}}
                 data={this.state.doctorsArray}
                 renderItem = {({item})=>(

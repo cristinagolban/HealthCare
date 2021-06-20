@@ -46,6 +46,7 @@ export default class ListaProgramari extends React.Component {
         var statusTemp = '';
         var oraTemp = '';
         var doctorTemp = '';
+        var dataTemp = '';
 
         snapshot.forEach((childSnapshot) => {
             childSnapshot.forEach((childChild1) => {
@@ -57,19 +58,22 @@ export default class ListaProgramari extends React.Component {
                             status: '',
                             ora: '',
                             doctor: '',
+                            data: '',
                         }
-
+                        
                         nameTemp = childChild2.val().nume;
                         prenumeTemp = childChild2.val().prenume;
                         statusTemp = childChild2.val().status;
                         oraTemp = childChild2.key;
                         doctorTemp = childSnapshot.key;
+                        dataTemp = childChild1.key
 
                         objectTemp.nume = nameTemp;
                         objectTemp.prenume = prenumeTemp;
                         objectTemp.status = statusTemp;
                         objectTemp.ora = oraTemp;
                         objectTemp.doctor = doctorTemp;
+                        objectTemp.data = dataTemp;
 
                         objectArrayTemp.push(objectTemp);
                     }
@@ -110,6 +114,7 @@ export default class ListaProgramari extends React.Component {
         var statusTemp = '';
         var oraTemp = '';
         var doctorTemp = '';
+        var dataTemp = '';
 
         snapshot.forEach((childSnapshot) => {
             childSnapshot.forEach((childChild1) => {
@@ -121,6 +126,7 @@ export default class ListaProgramari extends React.Component {
                             status: '',
                             ora: '',
                             doctor: '',
+                            data: ''
                         }
 
                         nameTemp = childChild2.val().nume;
@@ -128,12 +134,14 @@ export default class ListaProgramari extends React.Component {
                         statusTemp = childChild2.val().status;
                         oraTemp = childChild2.key;
                         doctorTemp = childSnapshot.key;
+                        dataTemp = childChild1.key;
 
                         objectTemp.nume = nameTemp;
                         objectTemp.prenume = prenumeTemp;
                         objectTemp.status = statusTemp;
                         objectTemp.ora = oraTemp;
                         objectTemp.doctor = doctorTemp;
+                        objectTemp.data = dataTemp;
 
                         objectArrayTemp.push(objectTemp);
                     }
@@ -157,7 +165,7 @@ export default class ListaProgramari extends React.Component {
     return(
       <View style={{flex:1,backgroundColor:'white',marginTop:50}}>
       <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
-      <ScrollView style={{flex:1,backgroundColor:'white'}} 
+      <ScrollView style={{flex:1,backgroundColor:'white',marginTop:'5%'}} 
                 refreshControl={
                     <RefreshControl
                     refreshing={this.state.refresh}
@@ -168,12 +176,30 @@ export default class ListaProgramari extends React.Component {
           <Text style={{fontSize:20, fontFamily:'bold-font', textAlign:'center'}}>Programarile Mele</Text>
         {
             this.state.programari.map( item =>
-                 <View style={{flexDirection:'row', justifyContent:'space-around', marginHorizontal:'2%', backgroundColor:'#fafafa',height:40, borderRadius:30, alignItems:'center', marginVertical:'2%'}}>
-                    <Text style={styles.textStyleName}>{item.nume}</Text>
-                    <Text style={styles.textStyleName}>{item.prenume}</Text>
-                    <Text style={ (item.status === 'In asteptare' ? styles.textStyleAwait : styles.textStyleAccept) }>{item.status}</Text>  
-                    <Text style={styles.textStyleName}>{item.ora}</Text>
-                    <Text style={styles.textStyleName}>{item.doctor}</Text>
+                 <View style={{flexDirection:'row', marginHorizontal:'5%', backgroundColor:'#fafafa',height:120, width:'90%', borderRadius:20, alignItems:'center', marginVertical:'2%', overflow:'hidden'}}>
+                    <View style={ (item.status === 'In asteptare' ? styles.barStyleAwait : styles.barStyleAccept)}></View>
+                    <View style={{width:'100%', height: 120}}>
+                      <View style={{position:'absolute', top: 20, left: 10}}>
+                        <Text style={styles.textStyleName}>{item.nume} {item.prenume}</Text>
+                      </View>
+                      <View style={{position:'absolute', top: 20, right: 20}}>
+                        <Text style={ (item.status === 'In asteptare' ? styles.textStyleAwait : styles.textStyleAccept) }>{item.status}</Text>  
+                      </View>
+                      <View style={{position:'absolute', top: 60, left: 10, flexDirection:'row'}}>
+                        <View>
+                          <Text style={{fontSize:10, fontFamily: 'normal-font'}}>ORA</Text>
+                          <Text style={styles.textStyleName2}>{item.ora}</Text>
+                        </View>
+                        <View style={{marginLeft:'10%'}}>
+                          <Text style={{fontSize:10, fontFamily: 'normal-font'}}>DOCTORUL</Text>
+                          <Text style={styles.textStyleName2}>{item.doctor}</Text>
+                        </View>
+                        <View style={{marginLeft:'10%'}}>
+                          <Text style={{fontSize:10, fontFamily: 'normal-font'}}>DATA</Text>
+                          <Text style={styles.textStyleName2}>{item.data}</Text>
+                        </View>
+                      </View>
+                    </View>
                 </View>    
             )
         }
@@ -186,10 +212,15 @@ export default class ListaProgramari extends React.Component {
 
 const styles = StyleSheet.create({
     textStyleName:{
-        fontSize:14,
+        fontSize:18,
         fontFamily:'normal-font',
         color:'black'
     },
+    textStyleName2:{
+      fontSize:16,
+      fontFamily:'normal-font',
+      color:'black'
+  },
     textStyleAwait:{
         fontSize:14,
         fontFamily:'bold-font',
@@ -197,8 +228,26 @@ const styles = StyleSheet.create({
     },
     textStyleAccept:{
         fontSize:14,
-        fontFamily:'normal-font',
+        fontFamily:'bold-font',
         color:'green'
     },
+    barStyleAccept:{
+      flexDirection:'column', 
+      height:150,
+      width:7, 
+      backgroundColor:"green", 
+      borderTopLeftRadius:20, 
+      borderBottomLeftRadius: 50, 
+      overflow:'hidden'
+    },
+    barStyleAwait:{
+      flexDirection:'column', 
+      height:150,
+      width:7, 
+      backgroundColor:"red", 
+      borderTopLeftRadius:20, 
+      borderBottomLeftRadius: 50, 
+      overflow:'hidden'
+    }
 })
 

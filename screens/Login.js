@@ -112,10 +112,10 @@ export default class Login extends React.Component {
                     transparent = {true}
  
                     >
-    <View style={{    flex: 1,
+    <View style={{    height:'74%',
          justifyContent: "center",
-         alignItems: "center",marginTop:25}}>
-    <View style={{flex:0.85,
+         alignItems: "center",marginVertical:'13%'}}>
+    <View style={{height:'85s%',
          backgroundColor: "white",
          borderRadius: 20,
          width:'95%',
@@ -127,61 +127,71 @@ export default class Login extends React.Component {
          shadowOpacity: 0.25,
          shadowRadius: 4,
          elevation: 5}}>
-     <Text style={{fontSize:24,textAlign:'center',fontWeight:'bold', marginTop:'5%'}} >Alege tipul de user</Text>
+     <Text style={{fontSize:24,textAlign:'center',fontWeight:'bold', marginTop:'5%', color:'#2a6049'}} >Alege tipul de user</Text>
      <View style={{flexDirection:"column",alignItems:'center',justifyContent:"center",marginTop:'5%'}}>
               
       <TouchableOpacity onPress={()=>this.setState({isModalVisible:false, typeOfUser:'doctor'})} style={{marginTop:'5%',width:'75%'}}>
                     <View style={{alignItems:"center"}}>
-                      <MaterialCommunityIcons  name={'doctor'} size={100}/>
-                      <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold'}} >Doctor</Text>
+                      <MaterialCommunityIcons  name={'doctor'} size={100} color={'#2a6049'}/>
+                      <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold', color:'#2a6049'}} >Doctor</Text>
                     </View>
       </TouchableOpacity>
  
       <View style={{borderWidth:0.5, borderColor:'grey', width:'75%', marginVertical:"5%"}}></View>
  
       <TouchableOpacity onPress={()=>this.setState({isModalVisible:false, typeOfUser:'asistenta'})} >
-                    <MaterialCommunityIcons  name={'mother-nurse'} size={100}/>
-                    <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold'}}>Asistent</Text>
+                    <MaterialCommunityIcons  name={'mother-nurse'} size={100} color={'#2a6049'}/>
+                    <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold', color:'#2a6049'}}>Asistent</Text>
       </TouchableOpacity>
  
       <View style={{borderWidth:0.5, borderColor:'grey', width:'75%', marginVertical:"5%"}}></View>
  
       <TouchableOpacity onPress={()=>this.setState({isModalVisible:false, typeOfUser:'user'})} >
-                    <MaterialCommunityIcons  name={'account'} size={100}/>
-                    <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold'}}>User</Text>
+                    <MaterialCommunityIcons  name={'account'} size={100} color={'#2a6049'}/>
+                    <Text style={{fontSize:18,textAlign:'center',fontWeight:'bold', color:'#2a6049'}}>User</Text>
       </TouchableOpacity>
             </View>
             </View>
           </View>
           </Modal>
  
-        <Text>Login</Text>
+        
+          <Text style={{color:'#2a6049', fontFamily:'bold-font', fontSize:30, marginBottom:'5%'}}>Login</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          secureTextEntry
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Password"
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
-        <Button title="Login"
-                onPress={this.handleLogin}
-        />
-        <Button
-          title="Don't have an account? Sign Up"
-          onPress={this.getDataFromDatabase}
-        />
+        <View style={{backgroundColor:'#2a6049', flexDirection:'row', borderRadius:20, alignItems:'center', height:50, width:'85%', marginTop:'3%'}}>
+            <TextInput
+                placeholder="Email"
+                placeholderTextColor='white'
+                autoCapitalize="none"
+                style={styles.textInput}
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+            />
+        </View>
+        <View style={{backgroundColor:'#2a6049', flexDirection:'row', borderRadius:20, alignItems:'center', height:50, width:'85%', marginTop:'3%'}}>
+            <TextInput
+                secureTextEntry
+                placeholder="Password"
+                placeholderTextColor='white'
+                autoCapitalize="none"
+                style={styles.textInput}
+                onChangeText={password => this.setState({ password })}
+                value={this.state.password}
+            />
+        </View>
+        <TouchableOpacity  onPress={this.handleLogin} style={{backgroundColor:'#2a6049', marginTop:'5%', borderRadius:20, height:40, justifyContent:'center', alignItems:'center', width:'35%'}}>
+            <Text style={{color:'white', fontSize:18, fontFamily:'normal-font'}}>
+                Login
+            </Text>
+        </TouchableOpacity>
+        <TouchableOpacity  onPress={() => this.props.navigation.navigate('SignUp')} style={{ marginTop:'5%', borderRadius:20, height:40,  width:'35%'}}>
+            <Text style={{color:'black', fontSize:14, fontFamily:'normal-font', textAlign:'center'}}>
+                Don't have an account? <Text style={{color:"#2a6049", fontSize:14, fontFamily:'bold-font'}}>SIGN UP</Text>
+            </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -194,10 +204,10 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
   },
   textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
+    color:'white',
+    width:'90%',
+    marginHorizontal:'5%',
+    fontSize:16,
+    fontFamily:'normal-font'
   }
 })
