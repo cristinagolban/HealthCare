@@ -17,11 +17,15 @@ import DetaliiDoctori from '../screens/User/DetaliiDoctori';
 import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
 import AsistentaPagina2 from '../screens/Asistenta/AsistentaPagina2';
 
+import HomeDoctor from '../screens/Doctor/HomeDoctor';
+import IstoricDoctor from '../screens/Doctor/IstoricDoctor';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
 const Tab2 = createMaterialBottomTabNavigator();
+const Tab3 = createMaterialBottomTabNavigator();
 
 function BottomTabNavigatorUser(){
     return(
@@ -102,6 +106,38 @@ function BottomTabNavigatorAsistenta(){
   )
 }
 
+function BottomTabNavigatorDoctor(){
+  return(
+      <Tab3.Navigator  initialRouteName="DoctorProgramari"
+                      activeColor='white'
+                      barStyle={{ backgroundColor:"#2a6049",
+                                  borderTopLeftRadius: 20,
+                                  borderTopRightRadius: 20,
+                                  overflow: 'hidden',
+                                  
+                      }}
+                      shifting={true}
+      >
+          <Tab3.Screen name='DoctorProgramari'  component={HomeDoctor} options={{   
+                                                                      tabBarIcon: ({color}) => (
+                                                                        <MaterialCommunityIcons  name={'format-list-text'} color={color} size={25}/>
+                                                                      ),
+                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programari</Text>
+                                                                      
+                                                                  }}/>
+           <Tab3.Screen name='DoctorIstoric'  component={IstoricDoctor} options={{   
+                                                                      tabBarIcon: ({color}) => (
+                                                                        <MaterialCommunityIcons  name={'history'} color={color} size={25}/>
+                                                                      ),
+                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Istoric</Text>
+                                                                      
+                                                                  }}/>                                                       
+          
+                                                            
+      </Tab3.Navigator>
+  )
+}
+
 
 const Stack = createStackNavigator();
  
@@ -165,6 +201,32 @@ function MyStack() {
                             )
                         })} 
           />
+          <Stack.Screen name="HomeDoctor" 
+                        component={BottomTabNavigatorDoctor} 
+                        options={ ({ navigation, route }) => ({ 
+                          headerTransparent:true,
+                          headerBackground: () => (
+                                              <View style={{backgroundColor:'white',height:50}} >
+                                              </View>
+                          ),
+                          headerTitle: () => (
+                                <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center'}}>
+                                  {/* <MaterialCommunityIcons  name={'account'} color="white" size={25}/> */}
+                                  <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}></Text>
+                                </View>
+                          ),
+                          headerRight: () => (
+                                  <TouchableOpacity  onPress={ () => navigation.navigate('SignUp')}>
+                                      <View style={{padding:6, backgroundColor:"#2a6049", borderTopLeftRadius:20,alignItems:'center'}}>
+                                      <MaterialCommunityIcons  name={'logout-variant'} color="white" size={30}/>
+                                      </View>
+                                  </TouchableOpacity>
+                                  
+                          ),
+                          headerLeft: () =>(
+                            <View></View>
+                          )
+                      })} />
         </Stack.Navigator>
       </NavigationContainer>
     );
