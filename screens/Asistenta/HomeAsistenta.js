@@ -327,7 +327,15 @@ handleAnuleazaRespins = () =>{
                   }
         >
 
-            {
+            { this.state.programari.length === 0 ?
+
+                <View style={{alignItems:'center'}}>
+                  <Text style={{color:'gray'}}>Nu exista programari in asteptare momentan.</Text>
+                  <MaterialCommunityIcons  name={'cancel'} size={30} color={'gray'}/>
+                </View>
+
+                :
+
                 this.state.programari.map((item) => (
                   <View style={{backgroundColor:"#2a6049",borderRadius:20,width:'90%', height:160, marginVertical:'3%', flexDirection:'column', overflow:'hidden'}}>
                     <ImageBackground    source={require('../../assets/gradient.jpg')}
