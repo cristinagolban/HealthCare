@@ -15,7 +15,6 @@ import ListaProgramari from '../screens/User/ListaProgramari';
 import DetaliiDoctori from '../screens/User/DetaliiDoctori';
 
 import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
-import AsistentaPagina2 from '../screens/Asistenta/AsistentaPagina2';
 
 import HomeDoctor from '../screens/Doctor/HomeDoctor';
 import IstoricDoctor from '../screens/Doctor/IstoricDoctor';
@@ -24,7 +23,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
-const Tab2 = createMaterialBottomTabNavigator();
 const Tab3 = createMaterialBottomTabNavigator();
 
 function BottomTabNavigatorUser(){
@@ -70,40 +68,6 @@ function BottomTabNavigatorUser(){
                                                               
         </Tab.Navigator>
     )
-}
-
-
-
-function BottomTabNavigatorAsistenta(){
-  return(
-      <Tab2.Navigator  initialRouteName="Acasa"
-                      activeColor='white'
-                      barStyle={{ backgroundColor:"#2a6049",
-                                  borderTopLeftRadius: 20,
-                                  borderTopRightRadius: 20,
-                                  overflow: 'hidden',
-                                  
-                      }}
-                      shifting={true}
-      >
-          <Tab2.Screen name='Acasa'  component={HomeAsistenta} options={{   
-                                                                      tabBarIcon: ({color}) => (
-                                                                        <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
-                                                                      ),
-                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
-                                                                      
-                                                                  }}/>
-           <Tab2.Screen name='Pag2'  component={AsistentaPagina2} options={{   
-                                                                      tabBarIcon: ({color}) => (
-                                                                        <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
-                                                                      ),
-                                                                      tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
-                                                                      
-                                                                  }}/>                                                       
-          
-                                                            
-      </Tab2.Navigator>
-  )
 }
 
 function BottomTabNavigatorDoctor(){
@@ -175,7 +139,7 @@ function MyStack() {
                         })} 
           />
           <Stack.Screen name="Asistenta"
-                        component={BottomTabNavigatorAsistenta}
+                        component={HomeAsistenta}
                         options={ ({ navigation, route }) => ({ 
                             headerTransparent:true,
                             headerBackground: () => (
