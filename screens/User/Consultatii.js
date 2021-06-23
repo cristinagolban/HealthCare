@@ -218,7 +218,7 @@ export default class Consultatii extends React.Component {
                       <View style={{position:'absolute', top: 100, left: 10, flexDirection:'row'}}>
                         <View>
                             <Text style={{fontSize:10, fontFamily: 'normal-font'}}>Raport Medical</Text>
-                            <Text style={styles.textStyleName3}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</Text>
+                            <Text style={styles.textStyleName3}>{item.raportMedical}</Text>
                         </View>
                        </View>
                     </View>
