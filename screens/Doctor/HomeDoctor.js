@@ -26,6 +26,7 @@ export default class HomeDoctor extends React.Component {
       programari:[],
       isModalConsulta: false,
       mesajConsultatie: '',
+      refresh: false,
     }
   }
 
@@ -204,6 +205,12 @@ export default class HomeDoctor extends React.Component {
                 </View>
             </View>
           </Modal>
+          <View style={{backgroundColor:"white",width:'100%' ,borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+            <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+                <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%', marginLeft:'0.5%'}}>Bine ai venit</Text>
+                <Text style={{fontSize:26, fontFamily:'bold-font',color:"#2a6049"}}>Rapoarte medicale</Text>
+            </View>
+        </View>
         <ScrollView contentContainerStyle={{alignItems:'center'}}
                     refreshControl={
                       <RefreshControl
@@ -211,8 +218,17 @@ export default class HomeDoctor extends React.Component {
                       onRefresh={this.onRefresh.bind(this)}
                       />
                   }
+                  style={{marginTop:'5%'}}
         >
-             {
+             {this.state.programari.length === 0 ?
+
+                <View style={{alignItems:'center'}}>
+                  <Text style={{color:'gray'}}>Nu exista rapoarte medicale momentan.</Text>
+                  <MaterialCommunityIcons  name={'cancel'} size={30} color={'gray'}/>
+                </View>
+
+                :
+
                 this.state.programari.map((item) => (
                   <View style={{backgroundColor:"#2a6049",borderRadius:20,width:'90%', height:160, marginVertical:'3%', flexDirection:'column', overflow:'hidden'}} key={item.simptome + Math.random().toString()}>
                     <ImageBackground    source={require('../../assets/gradient.jpg')}
