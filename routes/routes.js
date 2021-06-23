@@ -13,6 +13,7 @@ import HomeUser from '../screens/User/HomeUser';
 import Programeaza from '../screens/User/Programeaza';
 import ListaProgramari from '../screens/User/ListaProgramari';
 import DetaliiDoctori from '../screens/User/DetaliiDoctori';
+import Consultatii  from '../screens/User/Consultatii';
 
 import HomeAsistenta from '../screens/Asistenta/HomeAsistenta';
 
@@ -41,30 +42,37 @@ function BottomTabNavigatorUser(){
                                                                         tabBarIcon: ({color}) => (
                                                                           <MaterialCommunityIcons  name={'home'} color={color} size={25}/>
                                                                         ),
-                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Acasa</Text>
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:12}}>Acasa</Text>
                                                                         
                                                                     }}/>
             <Tab.Screen name='Programeaza'  component={Programeaza} options={{ 
                                                                         tabBarIcon: ({color}) => (
                                                                           <MaterialCommunityIcons  name={'calendar-arrow-right'} color={color} size={25}/>
                                                                         ),
-                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programeaza</Text>
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:12}}>Programeaza</Text>
                                                                         
                                                                     }}/>
             <Tab.Screen name='ListaProgramari'  component={ListaProgramari} options={{ 
                                                                         tabBarIcon: ({color}) => (
                                                                           <MaterialCommunityIcons  name={'format-list-text'} color={color} size={25}/>
                                                                         ),
-                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Programari</Text>
+                                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:12}}>Programari</Text>
                                                                         
                                                                     }}/>
             <Tab.Screen name='DetaliiDoctori'  component={DetaliiDoctori} options={{ 
                                                         tabBarIcon: ({color}) => (
                                                           <MaterialCommunityIcons  name={'doctor'} color={color} size={25}/>
                                                         ),
-                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:14}}>Doctori</Text>
+                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:12}}>Doctori</Text>
                                                         
-                                                    }}/>                                                      
+                                                    }}/>
+            <Tab.Screen name='Consultatii'  component={Consultatii} options={{ 
+                                                        tabBarIcon: ({color}) => (
+                                                          <MaterialCommunityIcons  name={'file-chart'} color={color} size={25}/>
+                                                        ),
+                                                        tabBarLabel: <Text style={{fontWeight:'bold', fontSize:12}}>Consultatii</Text>
+                                                        
+                                                    }}/>                                                          
                                                               
         </Tab.Navigator>
     )
