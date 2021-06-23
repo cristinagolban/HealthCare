@@ -103,7 +103,7 @@ export default class Consultatii extends React.Component {
 
     var admin = firebase;
     var db = admin.database();
-    var refPath = '/programari';
+    var refPath = '/istoric';
     var ref = db.ref(refPath);
     
     var emailAuth = this.state.emailFromUser;
@@ -246,7 +246,8 @@ const styles = StyleSheet.create({
     textStyleName3:{
         fontSize:12,
         fontFamily:'normal-font',
-        color:'black'
+        color:'black',
+        marginRight:'1%'
     },
     textStyleAwait:{
         fontSize:14,
