@@ -174,7 +174,15 @@ export default class ListaProgramari extends React.Component {
                 }
         >
           <Text style={{fontSize:20, fontFamily:'bold-font', textAlign:'center'}}>Programarile Mele</Text>
-        {
+        {this.state.programari.length === 0 ?
+
+            <View style={{alignItems:'center'}}>
+              <Text style={{color:'gray', textAlign:'center', marginHorizontal:'5%'}}>Nu exista nicio programare sau programarile tale au fost consultate de catre doctor.</Text>
+              <MaterialCommunityIcons  name={'cancel'} size={30} color={'gray'}/>
+            </View>
+
+            :
+
             this.state.programari.map( item =>
                  <View style={{flexDirection:'row', marginHorizontal:'5%', backgroundColor:'#fafafa',height:120, width:'90%', borderRadius:20, alignItems:'center', marginVertical:'2%', overflow:'hidden'}}>
                     <View style={ (item.status === 'In asteptare' ? styles.barStyleAwait : styles.barStyleAccept)}></View>
