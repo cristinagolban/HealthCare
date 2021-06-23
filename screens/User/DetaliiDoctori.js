@@ -82,9 +82,14 @@ export default class DetaliiDoctori extends React.Component {
     return(
       <View style={{alignItems:'center',justifyContent:'center', flex:1,flexDirection:'column',backgroundColor:'white',marginTop:50}}>
         <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
-
+          <View style={{backgroundColor:"white",width:'100%' ,borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+              <View style={{backgroundColor:"white",width:'90%',marginHorizontal:'5%', borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+                  <Text style={{fontSize:16, fontFamily:'normal-font',color:"#2a6049", marginBottom:'2%', marginLeft:'0.5%'}}>Prezentare</Text>
+                  <Text style={{fontSize:26, fontFamily:'bold-font',color:"#2a6049"}}>Detalii Doctori</Text>
+              </View>
+          </View>
             <FlatList 
-                style={{width:'100%', marginTop:'15%'}}
+                style={{width:'100%', marginTop:'5%'}}
                 contentContainerStyle={{alignItems:'center', justifyContent:'center'}}
                 data={this.state.doctorsArray}
                 renderItem = {({item})=>(
