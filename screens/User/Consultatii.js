@@ -195,13 +195,13 @@ export default class Consultatii extends React.Component {
                  <View style={{flexDirection:'row', marginHorizontal:'5%', backgroundColor:'#fafafa',height:170, width:'90%', borderRadius:20, alignItems:'center', marginVertical:'2%', overflow:'hidden'}}>
                     <View style={ (item.status === 'In asteptare' ? styles.barStyleAwait : styles.barStyleAccept)}></View>
                     <View style={{width:'100%', height: 170}}>
-                      <View style={{position:'absolute', top: 20, left: 10}}>
+                      <View style={{position:'absolute', top: 10, left: 10}}>
                         <Text style={styles.textStyleName}>{item.nume} {item.prenume}</Text>
                       </View>
-                      <View style={{position:'absolute', top: 20, right: 20}}>
+                      <View style={{position:'absolute', top: 10, right: 20}}>
                         <Text style={ (item.status === 'In asteptare' ? styles.textStyleAwait : styles.textStyleAccept) }>{item.status}</Text>  
                       </View>
-                      <View style={{position:'absolute', top: 60, left: 10, flexDirection:'row'}}>
+                      <View style={{position:'absolute', top: 50, left: 10, flexDirection:'row'}}>
                         <View>
                           <Text style={{fontSize:10, fontFamily: 'normal-font'}}>ORA</Text>
                           <Text style={styles.textStyleName2}>{item.ora}</Text>
@@ -215,10 +215,10 @@ export default class Consultatii extends React.Component {
                           <Text style={styles.textStyleName2}>{item.data}</Text>
                         </View>
                       </View>
-                      <View style={{position:'absolute', top: 110, left: 10, flexDirection:'row'}}>
+                      <View style={{position:'absolute', top: 100, left: 10, flexDirection:'row'}}>
                         <View>
                             <Text style={{fontSize:10, fontFamily: 'normal-font'}}>Raport Medical</Text>
-                            <Text style={styles.textStyleName3}>{item.raportMedical}</Text>
+                            <Text style={styles.textStyleName3}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</Text>
                         </View>
                        </View>
                     </View>
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
       color:'black'
     },
     textStyleName3:{
-        fontSize:14,
+        fontSize:12,
         fontFamily:'normal-font',
         color:'black'
     },
