@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import {View, Text, ScrollView, RefreshControl,StatusBar, ImageBackground, TouchableOpacity, Image, Alert, Modal, TextInput, StyleSheet} from 'react-native';
+import React from "react";
+import {View, Text, ScrollView, RefreshControl,StatusBar, ImageBackground, TouchableOpacity, Image, Modal, TextInput, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
