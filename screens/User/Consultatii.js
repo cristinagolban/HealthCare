@@ -1,11 +1,12 @@
 import React from 'react'
-import { RefreshControl, StyleSheet, Text, ScrollView, View, StatusBar } from 'react-native'
+import { RefreshControl, StyleSheet, Text, ScrollView, View, StatusBar, TouchableOpacity, Alert } from 'react-native'
 import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Print from 'expo-print';
+import * as MediaLibrary from "expo-media-library";
+import * as Sharing from "expo-sharing";
 export default class Consultatii extends React.Component {
-
 
     constructor(){
         super();
@@ -168,11 +169,69 @@ export default class Consultatii extends React.Component {
     this.setState({refresh:false});
   }
 
+changePDF = async ( raportul, doctor, nume, prenume ) =>{
+  
+let htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pdf Content</title>
+    <style>
+        body {
+            font-size: 16px;
+            color: rgb(42, 96, 73);
+        }
+        h1 {
+            text-align: center;
+            font-size: 32px;
+        }
+        h4 {
+           text-align: center;
+           font-size: 24px;
+           margin-top:200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HealthCare Raport Medical</h1>
+    <h2>Raportul medical a fost emis pe numele:</h2>
+    <h3 style="margin-left: 20px">`+nume+` `+prenume+`</h3>
+    <h2>Doctorul dumneavostra:</h2>
+    <h3 style="margin-left: 20px">`+doctor+`</h3>
+    <h2>Raportul medical:</h2>
+    <h3 style="margin-left: 20px">`+raportul+`</h3>
+    <h4>Va multumim ca ati ales HealthCare!</h4>
+</body>
+</html>
+`;
+  this.createPDF(htmlContent)
+}
+  
+createPDF = async ( html ) => {
+  try {
+    const { uri } = await Print.printToFileAsync({ html });
+    if (Platform.OS === "ios") {
+      await Sharing.shareAsync(uri);
+    } else {
+      const permission = await MediaLibrary.requestPermissionsAsync();
+      if (permission.granted) {
+        await MediaLibrary.createAssetAsync(uri);
+      }
+    }
+    Alert.alert("Finalizat!","Raportul medical a fost salvat cu succes!")
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   render(){
 
     return(
       <View style={{flex:1,backgroundColor:'white',marginTop:50}}>
       <StatusBar barStyle = "dark-content" backgroundColor = 'white'/>
+
       <ScrollView style={{flex:1,backgroundColor:'white',marginTop:'5%'}} 
                 refreshControl={
                     <RefreshControl
@@ -215,10 +274,11 @@ export default class Consultatii extends React.Component {
                           <Text style={styles.textStyleName2}>{item.data}</Text>
                         </View>
                       </View>
-                      <View style={{position:'absolute', top: 100, left: 10, flexDirection:'row'}}>
-                        <View>
-                            <Text style={{fontSize:10, fontFamily: 'normal-font'}}>Raport Medical</Text>
-                            <Text style={styles.textStyleName3}>{item.raportMedical}</Text>
+                      <View style={{position:'absolute', top: 110, left: 10, flexDirection:'row'}}>
+                        <View style={{width:'100%',height:'100%', justifyContent:'center', alignItems:'center'}}>
+                            <TouchableOpacity onPress={()=>this.changePDF(item.raportMedical, item.doctor, item.nume, item.prenume)} style={{width:'50%', height:30,  borderRadius:5,backgroundColor:"#2a6049", justifyContent:'center', alignItems:'center',overflow:'hidden'}}>
+                                  <Text style={{fontFamily:'normal-font', color:'white', fontSize:16}}>Descarca Raportul</Text>
+                            </TouchableOpacity>
                         </View>
                        </View>
                     </View>
