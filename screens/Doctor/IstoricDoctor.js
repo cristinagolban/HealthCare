@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import {View, Text, ScrollView, RefreshControl,StatusBar, ImageBackground, TouchableOpacity, Image, Alert, Modal, TextInput, StyleSheet} from 'react-native';
+import React from "react";
+import {View, Text, ScrollView, RefreshControl,StatusBar, ImageBackground, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CovidCard from '../../components/covid-card'; 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as firebase from "firebase";
 
