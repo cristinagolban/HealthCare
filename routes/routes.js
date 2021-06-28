@@ -21,7 +21,6 @@ import HomeDoctor from '../screens/Doctor/HomeDoctor';
 import IstoricDoctor from '../screens/Doctor/IstoricDoctor';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
 const Tab3 = createMaterialBottomTabNavigator();
@@ -129,7 +128,6 @@ function MyStack() {
                             ),
                             headerTitle: () => (
                                   <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center'}}>
-                                    {/* <MaterialCommunityIcons  name={'account'} color="white" size={25}/> */}
                                     <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}></Text>
                                   </View>
                             ),
@@ -156,7 +154,6 @@ function MyStack() {
                             ),
                             headerTitle: () => (
                                   <View style={{flexDirection:'row', alignContent:'center', justifyContent:'center'}}>
-                                    {/* <MaterialCommunityIcons  name={'account'} color="white" size={25}/> */}
                                     <Text style={{fontWeight:'bold', textAlign:'center', fontSize:20, color:"white"}}></Text>
                                   </View>
                             ),
