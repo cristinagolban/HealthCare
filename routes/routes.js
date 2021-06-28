@@ -22,6 +22,10 @@ import IstoricDoctor from '../screens/Doctor/IstoricDoctor';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 const Tab = createMaterialBottomTabNavigator();
 const Tab3 = createMaterialBottomTabNavigator();
 

@@ -12,7 +12,6 @@ LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export default class Programeaza extends React.Component {
 
-
   constructor(){
 
     super();

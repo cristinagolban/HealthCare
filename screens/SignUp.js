@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import * as firebase from "firebase";
  
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 export default class SignUp extends React.Component {
   
   state = { email: '', password: '', errorMessage: null, fPassword: '' }

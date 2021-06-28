@@ -2,6 +2,10 @@ import React from "react";
 import {View, Text, ScrollView, RefreshControl,StatusBar, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CovidCard from '../../components/covid-card'; 
+
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 export default class HomeUser extends React.Component {
 
   constructor(){

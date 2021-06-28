@@ -6,6 +6,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Print from 'expo-print';
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
+
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 export default class Consultatii extends React.Component {
 
     constructor(){

@@ -11,6 +11,10 @@ import * as firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 var emailother = "";
 var passwordother = "";
 

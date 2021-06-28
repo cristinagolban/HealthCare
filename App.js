@@ -24,7 +24,9 @@ import "firebase/storage";
   };
   // Initialize Firebase
  
-
+  import { LogBox } from 'react-native';
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();//Ignore all log notifications
  
   //Imports for the fonts 
   import * as Font from 'expo-font';

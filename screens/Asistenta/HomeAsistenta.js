@@ -5,6 +5,9 @@ import * as firebase from "firebase";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import email from 'react-native-email'
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 export default class HomeAsistenta extends React.Component {
 
   #detaliiStergere = {
