@@ -96,7 +96,6 @@ export default class HomeAsistenta extends React.Component {
 
         })
         this.setState({programari:_tempProgramari});
-        //console.log(this.state.programari);
       })
   }
 
@@ -109,33 +108,20 @@ export default class HomeAsistenta extends React.Component {
   }
 
   handlerRespinge = (refPath, oraProgramare, email) =>{
-    
-
-    //Alert.alert('Action!', 'Programarea a fost respinsa cu succes!');
     this.#detaliiStergere.refPath = refPath;
     this.#detaliiStergere.oraProgramare = oraProgramare;
     this.#detaliiStergere.email = email
     this.setState({isModalRefusedEmail: true, rememberEmail: email})
-    //this.props.navigation.reset({index:0, routes:[{name:"Acasa"}]});
   }
 
   handlerAccepta = (refPath, oraProgramare, nume, prenume, simptome, email) =>{
-    
-    // console.log(refPath);
-    // console.log(oraProgramare);
-    // console.log(nume + prenume + simptome);
-    
-
     this.#detaliiAcceptare.refPath = refPath;
     this.#detaliiAcceptare.oraProgramare = oraProgramare;
     this.#detaliiAcceptare.nume = nume;
     this.#detaliiAcceptare.prenume = prenume;
     this.#detaliiAcceptare.simptome = simptome;
     this.#detaliiAcceptare.email = email;
-    //Alert.alert('Action!', 'Programarea a fost acceptata cu succes!');
     this.setState({isModalAcceptedEmail: true, rememberEmail: email})
-    
-    //this.props.navigation.reset({index:0, routes:[{name:"Acasa"}]});
   }
 
   handleEmailAcceptat = () => {
