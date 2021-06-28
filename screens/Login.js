@@ -4,11 +4,8 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   Modal,
-  TouchableOpacity,
-  TouchableHighlightBase,
-  Alert,
+  TouchableOpacity
 } from "react-native";
 import * as firebase from "firebase";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
