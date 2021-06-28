@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {View, Text, StatusBar, Alert, TextInput, TouchableOpacity, ImageBackground, ScrollView, SafeAreaView} from 'react-native';
+import React from 'react';
+import {View, Text, StatusBar, Alert, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
 import * as firebase from "firebase";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
