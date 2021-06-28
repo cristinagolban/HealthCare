@@ -3,19 +3,11 @@ import {
     Dimensions,
     View,
     Text,
-    TouchableOpacity,
     Image,
     ImageBackground
 } from 'react-native';
 
 export default class CovidCard extends React.Component{
-
-
-        // #roPaths = {
-        //     flagPath: require('../assets/RomaniaFlag.png'),
-        //     shapePath: require('../assets/RomaniaShape.png')
-        // }
-
 
         render(){
             return(
