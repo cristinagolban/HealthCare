@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
-import {View, Text, StatusBar, Alert, TextInput, TouchableOpacity, ImageBackground, ScrollView, SafeAreaView, Image, FlatList} from 'react-native';
+import React from 'react';
+import {View, Text, StatusBar, Image, FlatList} from 'react-native';
 import * as firebase from "firebase";
-import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
-
-
-
-
 export default class DetaliiDoctori extends React.Component {
 
 
