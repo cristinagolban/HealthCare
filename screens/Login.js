@@ -39,7 +39,6 @@ export default class Login extends React.Component {
   };
  
   handleLogin = () => {
-    console.log(this.state.typeOfUser);
     if (this.state.typeOfUser === "doctor") {
       this.getDataFromDatabaseDoctor();
     } else if (this.state.typeOfUser === "user") {
