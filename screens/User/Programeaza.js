@@ -84,7 +84,6 @@ export default class Programeaza extends React.Component {
           
       });
       this.setState({doctorsArray:tempDoctorsArray});
-      console.log(this.state.doctorsArray);
     }).catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
     });
@@ -138,7 +137,6 @@ export default class Programeaza extends React.Component {
         snapshot.forEach((childSnapshot) => {
   
             var tempHour = '';
-            //console.log(childSnapshot.key);
             tempHour = childSnapshot.key
             tempHoursArray.push(tempHour);
         
@@ -156,7 +154,6 @@ export default class Programeaza extends React.Component {
     }else{
       this.setState({differenceArray:this.schedule.filter(x => ! this.state.scheduleArray.includes(x))});
     }
-    console.log(this.differenceArray);
   }
 
 
@@ -280,7 +277,7 @@ export default class Programeaza extends React.Component {
 
                 {
                 this.state.differenceArray.map((item) => (
-                  <TouchableOpacity onPress={() => {this.setState({pickedHour:item}),console.log(this.state.pickedHour)}}>
+                  <TouchableOpacity onPress={() => {this.setState({pickedHour:item})}}>
                       <Text style={{color:'white', fontSize:20, fontFamily:'normal-font',}}>{item}  </Text>
                   </TouchableOpacity>
                 ))
